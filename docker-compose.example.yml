@@ -1,0 +1,40 @@
+version: '2.0'
+services:
+  sabnzbd:
+    container_name: sabnzbd
+    image: rpi_docker_sabnzbd:latest
+    ports:
+      - 8080:8080
+    volumes:
+      - /mnt/storage/configs/docker/sabnzbd:/config
+      - /mnt/storage/Downloads:/data
+    networks:
+      main:
+        aliases:
+          - sabnzbd
+  sickbeard:
+    container_name: sickbeard
+    image: rpi_docker_sickbeard:latest
+    ports:
+      - 8081:8081
+    volumes:
+      - /mnt/storage/configs/docker/sickbeard:/config
+      - /mnt/storage/:/data
+    networks:
+      main:
+        aliases:
+          - sickbeard
+  couchpotato:
+    container_name: couchpotato
+    image: rpi_docker_couchpotato
+    ports:
+      - 5050:5050
+    volumes:
+      - /mnt/storage/configs/docker/couchpotato:/config
+      - /mnt/storage:/data
+    networks:
+      main:
+        aliases:
+          - couchpotato
+networks:
+  main:
